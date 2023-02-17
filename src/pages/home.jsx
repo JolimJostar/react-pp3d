@@ -28,7 +28,7 @@ import SimpleIcon from "../images/simple.svg"
 import StandartIcon from "../images/standart.svg"
 import UniqeIcon from "../images/uniqe.svg"
 import Logo from "../images/logo.png"
-import RedatorImage from "../images/redactor.jpg"
+import RedatorImage from "../images/redactor.svg"
 import PortfolioCard from "../components/portfoilo_card"
 import FaqCard from "../components/faq-card"
 import emailjs from '@emailjs/browser';
