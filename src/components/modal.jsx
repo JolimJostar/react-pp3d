@@ -5,6 +5,7 @@ import DoneIcon from '../images/done.svg';
 import emailjs from '@emailjs/browser';
 import EmailjsData from '../helpers/email'
 import toast from 'react-simple-toasts';
+import { useEffect } from "react";
 
 
 
@@ -20,28 +21,31 @@ const Modal = props => {
     const sendEmail = (e) => {
         e.preventDefault();
         setLoading(true);
-        setSended(true);
-        setLoading(false);
-        // emailjs.sendForm(EmailjsData.SERVICE_ID, EmailjsData.TEMPLATE_ID, form.current, EmailjsData.PUBLIC_KEY)
-        //     .then((result) => {
-        //         setSended(true);
-        //         form.current.reset();
-        //         setLoading(false);
-        //     }, (error) => {
-        //         toast('Произошла ошибка', { className: 'toast' });
-        //         setLoading(false);
-        //     });
+        emailjs.sendForm(EmailjsData.SERVICE_ID, EmailjsData.TEMPLATE_ID, form.current, EmailjsData.PUBLIC_KEY)
+            .then((result) => {
+                setSended(true);
+                form.current.reset();
+                setLoading(false);
+            }, (error) => {
+                toast('Произошла ошибка', { className: 'toast' });
+                setLoading(false);
+            });
 
     };
 
+    useEffect(() => {
+        setSended(false);
+        setLoading(false);
+    }, [])
+
     return (
-        <CSSTransition in={props.in} timeout={500} classNames='fade' nodeRef={modalNodeRef}>
-            <div className="modal" ref={modalNodeRef}>
-                <div className="modal-content animated">
+        <CSSTransition key={props.in} in={props.in} timeout={250} classNames='fade' nodeRef={modalNodeRef} unmountOnExit>
+            <div onClick={() => { props.onClose(); setSended(false); setLoading(false); }} className="modal" ref={modalNodeRef}>
+                <div onClick={(e) => e.stopPropagation()} className="modal-content animated">
                     <SwitchTransition mode={'out-in'}>
                         <CSSTransition
                             key={sended}
-                            timeout={500}
+                            timeout={250}
                             in={sended}
                             nodeRef={nodeRef}
                             classNames="fade"
@@ -51,12 +55,12 @@ const Modal = props => {
                                 {sended ?
                                     <div style={{ height: '320px', justifyContent: 'space-between', alignItems: 'center' }} className='flex column'>
                                         <img src={DoneIcon} style={{ width: '110px', height: '87px' }} alt="" />
-                                        <p>Ваша заявка успешно отправлена</p>
-                                        <button onClick={props.onClose}>Принять</button>
+                                        <p className="modal-success-text">Ваша заявка успешно отправлена</p>
+                                        <button onClick={() => { props.onClose(); setSended(false); setLoading(false); }}>Принять</button>
                                     </div>
                                     :
                                     <div>
-                                        <img src={CloseIcon} alt="" style={{ position: 'absolute', top: '25px', right: '25px', width: '38px', height: '38px' }} />
+                                        <img onClick={() => { props.onClose(); setSended(false); setLoading(false); }} src={CloseIcon} alt="" className="modal-close-icon" />
                                         <div className="modal-header">
                                             <h2>Заполните форму</h2>
                                             <div className="h-8"></div>
@@ -65,14 +69,17 @@ const Modal = props => {
                                         <div className="h-40"></div>
                                         <div className="modal-body">
                                             <form ref={form} onSubmit={sendEmail} className='flex column centered-alingment w-588'>
-                                                <input type="text" required name="firstname" placeholder="Имя" className="w-100" />
-                                                <div className="h-40"></div>
+                                                <input type="text" required name="name" placeholder="Имя" className="w-100" />
+                                                <div className="h-32 pc-hidden"></div>
+                                                <div className="h-40 phone-hidden"></div>
                                                 <input type="phone" required name="phone" placeholder="Телефон" className="w-100" />
-                                                <div className="h-40"></div>
+                                                <div className="h-32 pc-hidden"></div>
+                                                <div className="h-40 phone-hidden"></div>
                                                 <input type="text" name="messenger" placeholder="Месенджер" className="w-100" />
-                                                <div className="h-40"></div>
-                                                <h6>Вы выбрали {props.cover} обложку с {props.filling} наполнением</h6>
-                                                <div className="h-24"></div>
+                                                <div className="h-40 phone-hidden"></div>
+                                                {/* <h6>Вы выбрали {props.cover} обложку с {props.filling} наполнением</h6> */}
+                                                <div className="h-24 phone-hidden"></div>
+                                                <div className="h-32 pc-hidden"></div>
                                                 {loading ? <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> : <button type="submit" >Отправить</button>}
                                             </form>
                                         </div>

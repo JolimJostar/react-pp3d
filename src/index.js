@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 import './index.css';
@@ -10,11 +10,11 @@ import reportWebVitals from './reportWebVitals';
 import Home from './pages/home'
 import Redactor from './pages/readactor'
 
-
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Home />,
+
   },
   {
     path: "/redactor",
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-     <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

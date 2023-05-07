@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="a" data-name="b" xmlns="http://www.w3.org/2000/svg" width="565.56mm" height="374.01mm" viewBox="0 0 1603.16 1060.18">
+  <defs>
+    <style>
+      .i {
+        fill-rule: evenodd;
+      }
+
+      .i, .j, .k {
+        stroke: #000;
+      }
+
+      .l {
+        fill: #fff;
+      }
+
+      .j {
+        fill: none;
+        stroke-width: 15.76px;
+      }
+    </style>
+  </defs>
+  <g id="b" data-name="c">
+    <rect id="c" data-name="q" class="l" x="757.88" y="1039.18" width="83" height="7"/>
+    <path id="d" data-name="r" class="j" d="M7.88,7.88H1595.28v1023.5H7.88V7.88Z"/>
+    <path id="e" data-name="s" class="k" d="M794.88,7.88h7.46v1023.5h-7.46V7.88Z"/>
+    <path id="f" data-name="t" class="i" d="M742.88,1046.68h113v13h-113v-13Z"/>
+    <path id="g" data-name="u" class="i" d="M840.88,1029.78h15v16h-15v-16Z"/>
+    <path id="h" data-name="v" class="i" d="M742.88,1029.78h15v16h-15v-16Z"/>
+  </g>
+</svg>

@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import { useSwipeable } from 'react-swipeable';
 import Video from '../components/video'
 import Transition from '../components/transition'
 import Modal from '../components/modal'
@@ -11,7 +13,7 @@ import UniqeCover from "../images/uniqe_cover.jpg"
 import BlackCoverFull from "../images/black_cover_full.png"
 import WhiteCoverFull from "../images/white_cover_full.png"
 import UniqeCoverFull from "../images/uniqe_cover_full.png"
-import UniqeFilling from "../images/uniqe_filling.jpg"
+import UniqeFilling from "../images/uniqe_filling.png"
 import SimpleIcon from "../images/simple.svg"
 import StandartIcon from "../images/standart.svg"
 import UniqeIcon from "../images/uniqe.svg"
@@ -36,7 +38,7 @@ import ReverceSecondStepVideoWhite from '../videos/s23.mp4';
 import ReverceThirdStepVideoWhite from '../videos/s24.mp4';
 import ReverceFourthStepVideoWhite from '../videos/s25.mp4';
 
-function Redactor() {
+function Redactor(props) {
     const [activePage, setActivePage] = useState(0);
     const [desiredPage, setDesiredPage] = useState(0);
     const [activeCover, setActiveCover] = useState(1);
@@ -66,6 +68,19 @@ function Redactor() {
     const ReverceSecondVideoRefWhite = useRef(null);
     const ReverceThirdVideoRefWhite = useRef(null);
     const ReverceFourthVideoRefWhite = useRef(null);
+    const handlers = useSwipeable({
+        onSwipedRight: (eventData) => {
+            if (activeVideoPart > 2 && activePage === 1) {
+                handleDesiredVideoPartChange(activeVideoPart - 1)
+            }
+        },
+        onSwipedLeft: (eventData) => {
+            if (activeVideoPart < 5 && activePage === 1) {
+                handleDesiredVideoPartChange(activeVideoPart + 1)
+            }
+        },
+    });
+    const navigate = useNavigate();
 
     const helloRef = useRef(null);
     const goodbyeRef = useRef(null);
@@ -161,17 +176,37 @@ function Redactor() {
         setDesiredVideoPart(desiredPart);
     };
 
+    const getCoverName = (coverId) => {
+        if (coverId === 1) {
+            return 'черную';
+        } else if (coverId === 2) {
+            return 'белую';
+        } else if (coverId === 3) {
+            return 'уникальную';
+        }
+    }
+
+    const getFillingName = (fillingId) => {
+        if (fillingId === 1) {
+            return 'простым';
+        } else if (fillingId === 2) {
+            return 'обычным';
+        } else if (fillingId === 3) {
+            return 'уникальным';
+        }
+    }
 
 
     return (
-        <div className='h-100vh centered flex'>
-            <Modal cover={'uniqe'} filling={'uniqe'} onClose={() => {setModal(false);}} in={modal}/>
+        <div className='redactor-content-holder'>
+            <Modal cover={getCoverName(activeCover)} filling={getFillingName(activeFilling)} onClose={() => { setModal(false); }} in={modal} />
             <div className='navigate-back flex row centered centered-alingment'>
-                <img style={{width: "32px", height: '14px'}} src={ArrowBack} alt="" />
+                <img style={{ width: "32px", height: '14px' }} src={ArrowBack} alt="" />
                 <div className='w-8'></div>
-                <Link to={'/'} style={{textDecoration: 'inherit', color: 'inherit'}}><p >Вернуться на главную</p></Link>
+                <Link to={'/'} style={{ textDecoration: 'inherit', color: 'inherit' }}><p >Вернуться на главную</p></Link>
             </div>
-            <div className='flex centered-alingment'>
+            {/* <h2 style={{position: 'absolute', top: '140px', left: '50%', transform: 'translateX(-50%)'}}>Редактор альбома</h2> */}
+            <div className='flex centered-alingment redator-video-contraols-holder'>
                 <div>
                     <CSSTransition
                         in={activeVideoPart !== 0}
@@ -179,11 +214,11 @@ function Redactor() {
                         classNames="redactor"
                         nodeRef={redactorNodeRed}
                     >
-                        <div ref={redactorNodeRed} className={`${activeVideoPart === 0 ? 'redactor' : ''}`}>
+                        <div ref={redactorNodeRed} className={`${activeVideoPart === 0 ? 'redactor' : ''} redactor-wrapper`}>
                             <SwitchTransition mode={'out-in'}>
                                 <CSSTransition
                                     key={activePage}
-                                    timeout={150}
+                                    timeout={250}
                                     nodeRef={nodeRef}
                                     addEndListener={(done) => {
                                         nodeRef.current.addEventListener("transitionend", done, false);
@@ -195,7 +230,7 @@ function Redactor() {
                                             <div>
                                                 <h3>Выбери обложку:</h3>
                                                 <div className='h-40'></div>
-                                                <div className='flex row gap-24'>
+                                                <div className='choise-container gap-24 '>
                                                     <button className={`selectButton ${desiredCover === 1 ? 'selected' : ''}`} onClick={!transitioning ? () => setDesiredCover(1) : null}><img src={BlackCover} /></button>
                                                     <button className={`selectButton black ${desiredCover === 2 ? 'selected' : ''}`} onClick={!transitioning ? () => setDesiredCover(2) : null}><img src={WhiteCover} /></button>
                                                     <button className={`selectButton black ${desiredCover === 3 ? 'selected' : ''}`} onClick={!transitioning ? () => setDesiredCover(3) : null}><img src={UniqeCover} /></button>
@@ -205,7 +240,7 @@ function Redactor() {
                                                 <div>
                                                     <h3>Выбери структуру:</h3>
                                                     <div className='h-40'></div>
-                                                    <div className='flex row gap-24'>
+                                                    <div className='choise-container gap-24 '>
                                                         <button className={`selectButton ${desiredFilling === 1 ? 'selected' : ''}`} onClick={() => setDesiredFilling(1)}><img src={SimpleIcon} style={{ width: '100%', height: '100%' }} /></button>
                                                         <button className={`selectButton ${desiredFilling === 2 ? 'selected' : ''}`} onClick={() => setDesiredFilling(2)}><img src={StandartIcon} style={{ width: '100%', height: '100%' }} /></button>
                                                         <button className={`selectButton ${desiredFilling === 3 ? 'selected' : ''}`} onClick={() => setDesiredFilling(3)}><img src={UniqeIcon} style={{ width: '100%', height: '100%' }} /></button>
@@ -213,10 +248,10 @@ function Redactor() {
                                                 </div> : null
                                         }
                                         <div className='h-40'></div>
-                                        <div className='flex row'>
-                                            <button onClick={!transitioning && activePage !== 0 ? () => { setDesiredPage(activePage - 1) } : null}>Назад</button>
+                                        <div className='flex row redactor-button-holder'>
+                                            <button onClick={!transitioning && activePage !== 0 ? () => { setDesiredPage(activePage - 1) } : () => navigate('/')}>Назад</button>
                                             <div className='w-49'></div>
-                                            <button onClick={!transitioning && activePage !== 2 ? activePage === 1 ? () => console.log('done') : () => setDesiredPage(activePage + 1) : null}>{`${activePage === 1 ? 'Готово' : 'Продолжить'}`}</button>
+                                            <button onClick={!transitioning && activePage !== 2 ? activePage === 1 ? () => setModal(true) : () => setDesiredPage(activePage + 1) : null}>{`${activePage === 1 ? 'Готово' : 'Продолжить'}`}</button>
                                         </div>
                                     </div>
                                 </CSSTransition>
@@ -227,7 +262,7 @@ function Redactor() {
 
                 </div>
                 <div className='w-50'></div>
-                <div className='video-frame'>
+                <div className='video-frame' {...handlers}>
                     <Transition in={transitioning} onMiddle={() => { setActiveCover(desiredCover); setActiveFilling(desiredFilling); setActivePage(desiredPage); }} onExit={() => setTransitioning(false)} />
                     <Video zIndex={((activeVideoPart === 0) && !reversed) ? 1 : 0} src={InitialVideo} videoRef={initialVideoRef} onAnimationEnd={() => setActiveVideoPart(1)} />
                     <img style={{ objectFit: 'contain', top: '-50%', left: '-50%', height: '200%', width: '200%', position: 'absolute', zIndex: ((activeVideoPart !== 0) && (activePage === 0) && (activeCover === 1 || activeCover === 0)) ? 2 : 0 }} src={BlackCoverFull} />
