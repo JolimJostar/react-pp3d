@@ -200,10 +200,10 @@ function Redactor(props) {
     return (
         <div className='redactor-content-holder'>
             <Modal cover={getCoverName(activeCover)} filling={getFillingName(activeFilling)} onClose={() => { setModal(false); }} in={modal} />
-            <div className='navigate-back flex row centered centered-alingment'>
-                <img style={{ width: "32px", height: '14px' }} src={ArrowBack} alt="" />
-                <div className='w-8'></div>
-                <Link to={'/'} style={{ textDecoration: 'inherit', color: 'inherit' }}><p >Вернуться на главную</p></Link>
+            <div className='navigate-back'>
+                <Link to={'/'} style={{ textDecoration: 'inherit', color: 'inherit' }} className='flex row centered centered-alingment'><img style={{ width: "32px", height: '14px' }} src={ArrowBack} alt="" />
+                    <div className='w-8'></div><p >Вернуться на главную</p>
+                </Link>
             </div>
             {/* <h2 style={{position: 'absolute', top: '140px', left: '50%', transform: 'translateX(-50%)'}}>Редактор альбома</h2> */}
             <div className='flex centered-alingment redator-video-contraols-holder'>

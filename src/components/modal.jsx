@@ -39,13 +39,13 @@ const Modal = props => {
     }, [])
 
     return (
-        <CSSTransition key={props.in} in={props.in} timeout={250} classNames='fade' nodeRef={modalNodeRef} unmountOnExit>
+        <CSSTransition in={props.in} timeout={500} classNames='fade' nodeRef={modalNodeRef} unmountOnExit>
             <div onClick={() => { props.onClose(); setSended(false); setLoading(false); }} className="modal" ref={modalNodeRef}>
                 <div onClick={(e) => e.stopPropagation()} className="modal-content animated">
                     <SwitchTransition mode={'out-in'}>
                         <CSSTransition
                             key={sended}
-                            timeout={250}
+                            timeout={500}
                             in={sended}
                             nodeRef={nodeRef}
                             classNames="fade"

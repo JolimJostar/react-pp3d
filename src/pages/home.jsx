@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import React, { useRef, useState } from 'react';
-import Image8 from "../images/image 8.jpg"
+import Image1 from "../images/image 1.png"
+import Image2 from "../images/image 2.png"
+import Image3 from "../images/image 3.png"
 import Image9 from "../images/image 9.png"
-import Image10 from "../images/image 10.png"
 import Image11 from "../images/image 11.png"
 import Image12 from "../images/image 12.png"
 import Image13 from "../images/image 13.png"
-import Image14 from "../images/image 14.png"
 import Image15 from "../images/image 15.png"
 import InstaLogo from "../images/insta.svg"
 import VkLogo from "../images/vk.svg"
@@ -186,17 +186,17 @@ function Home() {
                 <div className="portfolio-image-holder">
                     <motion.div initial={{ y: -30, opacity: 0, }} custom={0} animate={imageControls} >
                         <figure style={{ width: '100%', height: '100%' }}>
-                            <img className="portfolio-image" src={Image8} alt="" />
+                            <img className="portfolio-image" src={Image11} alt="" />
                         </figure>
                     </motion.div>
                     <motion.div initial={{ y: -30, opacity: 0, }} custom={1} animate={imageControls} >
                         <figure style={{ width: '100%', height: '100%' }}>
-                            <img className="portfolio-image" src={Image10} alt="" />
+                            <img className="portfolio-image" src={Image1} alt="" />
                         </figure>
                     </motion.div>
                     <motion.div initial={{ y: -30, opacity: 0, }} custom={2} animate={imageControls} >
                         <figure style={{ width: '100%', height: '100%' }}>
-                            <img className="portfolio-image" src={Image13} alt="" />
+                            <img className="portfolio-image" src={Image12} alt="" />
                         </figure>
                     </motion.div>
                     <motion.div initial={{ y: -30, opacity: 0, }} custom={3} animate={imageControls} >
@@ -206,22 +206,22 @@ function Home() {
                     </motion.div>
                     <motion.div initial={{ y: -30, opacity: 0, }} custom={4} animate={imageControls} >
                         <figure style={{ width: '100%', height: '100%' }}>
-                            <img className="portfolio-image" src={Image11} alt="" />
+                            <img className="portfolio-image" src={Image2} alt="" />
                         </figure>
                     </motion.div>
                     <motion.div initial={{ y: -30, opacity: 0, }} custom={5} animate={imageControls} >
                         <figure style={{ width: '100%', height: '100%' }}>
-                            <img className="portfolio-image" src={Image15} alt="" />
+                            <img className="portfolio-image" src={Image13} alt="" />
                         </figure>
                     </motion.div>
                     <motion.div initial={{ y: -30, opacity: 0, }} custom={6} animate={imageControls} >
                         <figure style={{ width: '100%', height: '100%' }}>
-                            <img className="portfolio-image" src={Image12} alt="" />
+                            <img className="portfolio-image" src={Image15} alt="" />
                         </figure>
                     </motion.div>
                     <motion.div initial={{ y: -30, opacity: 0, }} custom={7} animate={imageControls} >
                         <figure style={{ width: '100%', height: '100%' }}>
-                            <img className="portfolio-image" src={Image14} alt="" />
+                            <img className="portfolio-image" src={Image3} alt="" />
                         </figure>
                     </motion.div>
                 </div>
@@ -426,7 +426,7 @@ function Home() {
                                 <div className="flex row">
                                     <h2 className="text-center ">1.</h2>
                                     <div className="additional-service-devider flex-shrink-0"></div>
-                                    <h2 className="weight-400 ">Индивидуальная верстка альбома - <b>500 ₽</b></h2>
+                                    <h2 className="weight-400 additional-service-text">Индивидуальная верстка альбома - <b>500 ₽</b></h2>
                                 </div>
                             </motion.div>
                             <div className="h-40"></div>
@@ -438,7 +438,7 @@ function Home() {
                                 <div className="flex row">
                                     <h2 className="text-center ">2.</h2>
                                     <div className="additional-service-devider flex-shrink-0"></div>
-                                    <h2 className="weight-400  ">Добавление разворота в альбом - <b>200 ₽</b>/шт.</h2>
+                                    <h2 className="weight-400 additional-service-text">Добавление разворота в альбом - <b>200 ₽</b>/шт.</h2>
                                 </div>
                             </motion.div>
                             <div className="h-40"></div>
@@ -450,7 +450,7 @@ function Home() {
                                 <div className="flex row">
                                     <h2 className="text-center ">3.</h2>
                                     <div className="additional-service-devider flex-shrink-0"></div>
-                                    <h2 className="weight-400  ">Добавить портрет на обложку - <b>300 ₽</b></h2>
+                                    <h2 className="weight-400 additional-service-text">Добавить портрет на обложку - <b>300 ₽</b></h2>
                                 </div>
                             </motion.div>
                             <div className="h-40"></div>
@@ -519,7 +519,7 @@ function Home() {
                         </form>
                         <div className="h-150"></div>
                         <div className="footer-icons">
-                            <a href="https://www.instagram.com/danyashkin" target='_blank' rel="noreferrer" >
+                            <a href="https://instagram.com/dan.yashkin?igshid=OGQ5ZDc2ODk2ZA==" target='_blank' rel="noreferrer" >
                                 <img src={InstaLogo} alt="" />
                             </a>
                             <a href="https://vk.com/danyyash" target='_blank' rel="noreferrer">

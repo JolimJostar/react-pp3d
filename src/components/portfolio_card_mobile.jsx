@@ -26,15 +26,27 @@ function PortfolioCardMobile(props) {
                             <DotGroup className='carousel-dots' showAsSelectedForCurrentSlideOnly={true} disableActiveDots={false} />
                         </CarouselProvider>
                     </div>
-                    <div className="h-16"></div>
-                    {props.bigPoints.map(e => <div className='flex flex-column'><h6 className='big-point'>• </h6><h6 className='big-point'>{e}</h6></div>)}
-                    <div className="h-16"></div>
-                    {props.smallPoints.map(e => <p className='small-point'>{e}</p>)}
+                    <div className="h-25"></div>
+                    {props.bigPoints.map(e => <div>
+                        <div className='flex flex-column'>
+                            <h6 className='big-point'>•&nbsp;</h6>
+                            <h6 className='big-point'>{e}</h6>
+                        </div>
+                        <br />
+                    </div>)}
+                    {props.smallPoints.map(e => <div>
+                        <div className='flex flex-column'>
+                            <h6 className='small-point'>•&nbsp;</h6>
+                            <p className='small-point'>{e}</p>
+                        </div>
+                        <br />
+                    </div>)}
                 </div>
+                <div className='h-6'></div>
                 <div className='flex column centered-alingment'>
-                    <h3>{props.price} ₽</h3>
+                    <h3 className='size-25'>{props.price} ₽</h3>
                     <div className="h-16"></div>
-                    <button className='size-25 ph-24 pv-8'>Открыть в редакторе</button>
+                    <button className='size-20 ph-16 pv-8'>Открыть в редакторе</button>
                 </div>
             </div>
         </div>
